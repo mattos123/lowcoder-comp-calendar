@@ -21,37 +21,25 @@ Um componente de calendário para Lowcoder que oferece visualizações em format
 Permite que você atribua funcionalidades ao clicar em um evento do calendario, ou em alguma data.
 <img width="1918" height="946" alt="image" src="https://github.com/user-attachments/assets/0a5548de-6d21-425d-91d2-aff4447eb8fc" />
 
+## Desenvolvimento
 
-Start dev server to develop your comp lib.
+### Desenvolvimento local
 
+Realize suas alterações no codigo, e as valide localmente atraves dos seguintes comandos.
 ```bash
+yarn install
 yarn start
-
-# or
-
-npm start
 ```
+Uma pagina do navegador será aberta com o seu componente em modo de desenvolvimento.
 
-## Build
+### Publicar seu componente
 
-Build current comp lib into a .tgz file that you can upload it to the Lowcoder Comp Market.
-
-Before build you should change the version in package.json file.
-
-```bash
-yarn build
-
-# or
-
-npm run build
-```
-
-## Publish
-To publish your plugin on NPM, use following command.
+Antes de bocê publicar, altere o nome e versão do componente no arquivo package.json
+Para publicar seu componente no NPM, use o seguinte comando.
 ```bash
 yarn build_publish
 
-# or
+# ou
 
 npm run build_publish
 ```
