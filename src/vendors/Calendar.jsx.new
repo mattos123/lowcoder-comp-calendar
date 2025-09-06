@@ -1,0 +1,236 @@
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+
+// Implementação simplificada usando div para debug
+function Calendar(props) {
+  const {
+    events = [],
+    view: initialView = 'dayGridMonth',
+    locale = 'pt-br',
+    height = 400,
+    width = '100%',
+    headerColor = '#f0f0f0',
+    todayColor = '#e8f4f8',
+    selectedColor = '#e0e0e0',
+    onDataChange,
+    onEventClick,
+    onDateClick
+  } = props;
+  
+  // Estado interno para controlar a visualização atual
+  const [currentView, setCurrentView] = useState(initialView);
+  
+  // Estado para controlar a data atual do calendário
+  const [currentDate, setCurrentDate] = useState(new Date());
+  
+  // Atualizar a visualização quando as props mudarem
+  useEffect(() => {
+    setCurrentView(initialView);
+  }, [initialView]);
+
+  // Função para obter o nome da visualização
+  const getViewName = (viewType) => {
+    const viewMap = {
+      'dayGridMonth': 'Mês',
+      'timeGridWeek': 'Semana',
+      'timeGridDay': 'Dia',
+      'listWeek': 'Lista'
+    };
+    return viewMap[viewType] || viewType;
+  };
+
+  // Função para renderizar o cabeçalho do calendário
+  const renderHeader = () => {
+    // Usar a data do estado interno
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    const day = currentDate.getDate();
+    
+    // Formatar mês e ano para exibição
+    const monthName = currentDate.toLocaleString(locale || 'pt-BR', { month: 'long' });
+    
+    // Determinar o título com base na visualização atual
+    let headerTitle = `${monthName} ${year}`;
+    if (currentView === 'timeGridWeek') {
+      const firstDayOfWeek = new Date(year, month, day - currentDate.getDay());
+      const lastDayOfWeek = new Date(year, month, day + (6 - currentDate.getDay()));
+      const formattedFirstDay = firstDayOfWeek.toLocaleDateString(locale || 'pt-BR', { day: 'numeric' });
+      const formattedLastDay = lastDayOfWeek.toLocaleDateString(locale || 'pt-BR', { day: 'numeric', month: 'short' });
+      headerTitle = `${formattedFirstDay} - ${formattedLastDay}`;  
+    } else if (currentView === 'timeGridDay') {
+      headerTitle = currentDate.toLocaleDateString(locale || 'pt-BR', { weekday: 'long', day: 'numeric', month: 'long' });
+    } else if (currentView === 'listWeek') {
+      headerTitle = `Semana de ${monthName}`;  
+    }
+    
+    return (
+      <div style={{ 
+        backgroundColor: headerColor, 
+        padding: '10px', 
+        textAlign: 'center',
+        width: '100%',
+        boxSizing: 'border-box',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+      }}>
+        <h3 style={{ margin: '5px 0', width: '100%' }}>Calendário ({getViewName(currentView)})</h3>
+        <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <button 
+            onClick={() => {
+              // Navegar para o mês/semana/dia anterior
+              const newDate = new Date(currentDate);
+              if (currentView === 'dayGridMonth') {
+                newDate.setMonth(newDate.getMonth() - 1);
+              } else if (currentView === 'timeGridWeek' || currentView === 'listWeek') {
+                newDate.setDate(newDate.getDate() - 7);
+              } else {
+                newDate.setDate(newDate.getDate() - 1);
+              }
+              setCurrentDate(newDate);
+              onDataChange && onDataChange({ action: 'prev', date: newDate });
+            }}
+            style={{ 
+              padding: '3px 8px', 
+              margin: '0 5px',
+              whiteSpace: 'nowrap',
+              minWidth: '80px'
+            }}
+          >
+            &laquo; Anterior
+          </button>
+          <span style={{ 
+            margin: '0 10px', 
+            fontWeight: 'bold',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+            flex: '1 1 auto',
+            textAlign: 'center'
+          }}>{headerTitle}</span>
+          <button 
+            onClick={() => {
+              // Navegar para o mês/semana/dia seguinte
+              const newDate = new Date(currentDate);
+              if (currentView === 'dayGridMonth') {
+                newDate.setMonth(newDate.getMonth() + 1);
+              } else if (currentView === 'timeGridWeek' || currentView === 'listWeek') {
+                newDate.setDate(newDate.getDate() + 7);
+              } else {
+                newDate.setDate(newDate.getDate() + 1);
+              }
+              setCurrentDate(newDate);
+              onDataChange && onDataChange({ action: 'next', date: newDate });
+            }}
+            style={{ 
+              padding: '3px 8px', 
+              margin: '0 5px',
+              whiteSpace: 'nowrap',
+              minWidth: '80px'
+            }}
+          >
+            Próximo &raquo;
+          </button>
+        </div>
+        <div style={{ 
+          marginTop: '10px', 
+          display: 'flex', 
+          justifyContent: 'center', 
+          gap: '5px',
+          flexWrap: 'wrap',
+          width: '100%'
+        }}>
+          <button 
+            onClick={() => {
+              // Ir para a data atual
+              setCurrentDate(new Date());
+              onDataChange && onDataChange({ action: 'today', date: new Date() });
+            }}
+            style={{ 
+              padding: '3px 8px',
+              backgroundColor: '#f0f0f0',
+              border: '1px solid #ccc',
+              borderRadius: '3px',
+              margin: '2px',
+              minWidth: '60px',
+              flex: '0 1 auto'
+            }}
+          >
+            Hoje
+          </button>
+          <button 
+            onClick={() => {
+              setCurrentView('dayGridMonth');
+              onDataChange && onDataChange({ view: 'dayGridMonth' });
+            }}
+            style={{ 
+              padding: '3px 8px', 
+              backgroundColor: currentView === 'dayGridMonth' ? '#007bff' : '#f8f9fa',
+              color: currentView === 'dayGridMonth' ? 'white' : 'black',
+              border: '1px solid #ccc',
+              borderRadius: '3px',
+              margin: '2px',
+              minWidth: '60px',
+              flex: '0 1 auto'
+            }}
+          >
+            Mês
+          </button>
+          <button 
+            onClick={() => {
+              setCurrentView('timeGridWeek');
+              onDataChange && onDataChange({ view: 'timeGridWeek' });
+            }}
+            style={{ 
+              padding: '3px 8px', 
+              backgroundColor: currentView === 'timeGridWeek' ? '#007bff' : '#f8f9fa',
+              color: currentView === 'timeGridWeek' ? 'white' : 'black',
+              border: '1px solid #ccc',
+              borderRadius: '3px',
+              margin: '2px',
+              minWidth: '60px',
+              flex: '0 1 auto'
+            }}
+          >
+            Semana
+          </button>
+          <button 
+            onClick={() => {
+              setCurrentView('timeGridDay');
+              onDataChange && onDataChange({ view: 'timeGridDay' });
+            }}
+            style={{ 
+              padding: '3px 8px', 
+              backgroundColor: currentView === 'timeGridDay' ? '#007bff' : '#f8f9fa',
+              color: currentView === 'timeGridDay' ? 'white' : 'black',
+              border: '1px solid #ccc',
+              borderRadius: '3px',
+              margin: '2px',
+              minWidth: '60px',
+              flex: '0 1 auto'
+            }}
+          >
+            Dia
+          </button>
+          <button 
+            onClick={() => {
+              setCurrentView('listWeek');
+              onDataChange && onDataChange({ view: 'listWeek' });
+            }}
+            style={{ 
+              padding: '3px 8px', 
+              backgroundColor: currentView === 'listWeek' ? '#007bff' : '#f8f9fa',
+              color: currentView === 'listWeek' ? 'white' : 'black',
+              border: '1px solid #ccc',
+              borderRadius: '3px',
+              margin: '2px',
+              minWidth: '60px',
+              flex: '0 1 auto'
+            }}
+          >
+            Lista
+          </button>
+        </div>
+      </div>
+    );
+  };
