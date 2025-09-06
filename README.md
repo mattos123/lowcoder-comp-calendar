@@ -5,12 +5,16 @@ Um componente de calendário para Lowcoder que oferece visualizações em format
 ## Tipos de visualização
 ### Mensal
 <img width="1919" height="944" alt="image" src="https://github.com/user-attachments/assets/4f998b5c-d72a-40c3-88bc-a2efb23b330d" />
+
 ### Semanal
 <img width="1916" height="941" alt="image" src="https://github.com/user-attachments/assets/a6ee5289-42de-40b3-b3ac-8bd5db8cb9dc" />
+
 ### Diária
 <img width="1915" height="942" alt="image" src="https://github.com/user-attachments/assets/19e10418-2ed8-4a13-a548-d2b24faf2576" />
+
 ### Lista
 <img width="1919" height="943" alt="image" src="https://github.com/user-attachments/assets/150ede3b-f7b5-4e0e-b272-fa4affcc20bc" />
+
 
 Start dev server to develop your comp lib.
 
