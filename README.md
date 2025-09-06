@@ -3,6 +3,7 @@
 Um componente de calendário para Lowcoder que oferece visualizações em formato mensal, semanal, diário e lista.
 
 ## Start
+<img width="1919" height="944" alt="image" src="https://github.com/user-attachments/assets/4f998b5c-d72a-40c3-88bc-a2efb23b330d" />
 
 Start dev server to develop your comp lib.
 
