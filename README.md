@@ -15,6 +15,12 @@ Um componente de calendário para Lowcoder que oferece visualizações em format
 ### Lista
 <img width="1919" height="943" alt="image" src="https://github.com/user-attachments/assets/150ede3b-f7b5-4e0e-b272-fa4affcc20bc" />
 
+## Funcionalidades
+
+### Event Handler
+Permite que você atribua funcionalidades ao clicar em um evento do calendario, ou em alguma data.
+<img width="1918" height="946" alt="image" src="https://github.com/user-attachments/assets/0a5548de-6d21-425d-91d2-aff4447eb8fc" />
+
 
 Start dev server to develop your comp lib.
 
