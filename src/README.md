@@ -1,35 +1,45 @@
-# Using Lowcoder Component Plugin
+# Lowcoder Calendar Component
 
-## Prerequisites
-Before you start, ensure you have a running Lowcoder installation. Alternatively, you can use it online at [https://app.lowcoder.cloud](https://app.lowcoder.cloud).
+Um componente de calendário para Lowcoder que oferece visualizações em formato mensal, semanal, diário e lista.
 
-## Steps to Use the Plugin
-1. **Open the App Editor**: Navigate to the App Editor within your Lowcoder application.
+## Tipos de visualização
+### Mensal
+<img width="1919" height="944" alt="image" src="https://github.com/user-attachments/assets/4f998b5c-d72a-40c3-88bc-a2efb23b330d" />
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/lowcoder-org/lowcoder-media-assets/main/images/App%20Editor%20%7C%20Main%20Screeen%20clean.png" alt="Lowcoder App Editor">
-</p>
+### Semanal
+<img width="1916" height="941" alt="image" src="https://github.com/user-attachments/assets/a6ee5289-42de-40b3-b3ac-8bd5db8cb9dc" />
 
-1. **Access Components Panel**: In the App Editor, locate the right panel where components are listed.
+### Diária
+<img width="1915" height="942" alt="image" src="https://github.com/user-attachments/assets/19e10418-2ed8-4a13-a548-d2b24faf2576" />
 
-2. **Switch to Extensions**: Find and switch on the "Extensions" toggle. This option allows you to add additional components to your project.
+### Lista
+<img width="1919" height="943" alt="image" src="https://github.com/user-attachments/assets/150ede3b-f7b5-4e0e-b272-fa4affcc20bc" />
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/lowcoder-org/lowcoder-media-assets/main/images/App%20Editor%20%7C%20Import%20Component%20Plugin%201.png" alt="Lowcoder App Editor">
-</p>
+## Funcionalidades
 
-3. **Load the Plugin**: Here you have the option to load a Lowcoder Component Plugin from NPM. For example, to load the "calendar" plugin, type `lowcoder-comp-calendar` in the provided field.
+### Event Handler
+Permite que você atribua funcionalidades ao clicar em um evento do calendario, ou em alguma data.
+<img width="1918" height="946" alt="image" src="https://github.com/user-attachments/assets/0a5548de-6d21-425d-91d2-aff4447eb8fc" />
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/lowcoder-org/lowcoder-media-assets/main/images/App%20Editor%20%7C%20Import%20Component%20Plugin%202.png" alt="Lowcoder App Editor">
-</p>
+## Desenvolvimento
 
-4. **Start Using the Plugin**: After loading the plugin, it will be available for use within your Lowcoder project. You can now integrate and customize the component as per your application's needs.
+### Desenvolvimento local
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/lowcoder-org/lowcoder-media-assets/main/images/App%20Editor%20%7C%20Import%20Component%20Plugin%203.png" alt="Lowcoder App Editor">
-</p>
+Realize suas alterações no codigo, e as valide localmente atraves dos seguintes comandos.
+```bash
+yarn install
+yarn start
+```
+Uma pagina do navegador será aberta com o seu componente em modo de desenvolvimento.
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/lowcoder-org/lowcoder-media-assets/main/images/App%20Editor%20%7C%20Import%20Component%20Plugin%204.png" alt="Lowcoder App Editor">
-</p>
+### Publicar seu componente
+
+Antes de bocê publicar, altere o nome e versão do componente no arquivo package.json
+Para publicar seu componente no NPM, use o seguinte comando.
+```bash
+yarn build_publish
+
+# ou
+
+npm run build_publish
+```
